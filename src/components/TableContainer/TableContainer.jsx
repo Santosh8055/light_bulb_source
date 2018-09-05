@@ -25,7 +25,13 @@ class TableContainer extends Component {
         // sortable: true,
         render: (value, row) => (
           <label className="switch" onClick={this.handlePropagation}>
-            <input type="checkbox" checked={value} onChange={(event) => { this.handleCheck(row, event); }} />
+            <input
+              type="checkbox"
+              checked={value}
+              onChange={(event) => {
+                this.handleCheck(row, event);
+              }}
+            />
             <span className="slider round" />
           </label>
         ),
@@ -34,18 +40,17 @@ class TableContainer extends Component {
         field: 'brightness',
         label: 'Brightness',
         // sortable: true,
-      }];
+      },
+    ];
     this.state = {
       bulbs: [],
       top: 60,
       selectedRow: {},
       bulbName: '',
       popoverOpen: false,
-
     };
     this.getBulbs();
   }
-
 
   componentDidMount() {
     // Intiall loading of the slider.
@@ -72,7 +77,6 @@ class TableContainer extends Component {
     });
   }
 
-
   setCurrentBulbBrightness(value) {
     // callback function of the setState is used.
     this.setState((prevState) => {
@@ -90,7 +94,6 @@ class TableContainer extends Component {
   setSliderValue(value) {
     $('#slider').roundSlider('setValue', value);
   }
-
 
   getBulbs() {
     BulbService.getBulbs().then((response) => {
@@ -127,7 +130,6 @@ class TableContainer extends Component {
     }
   }
 
-
   updateBulb(bulb) {
     BulbService.updateBulb(bulb);
   }
@@ -157,11 +159,12 @@ class TableContainer extends Component {
     });
   }
 
-
   // When a row is selected from the table.
   handleRowClick(row, event) {
     if (row !== this.state.selectedRow) {
-      const rowElement = $(event.target).closest('div[data-display="table-row"]');
+      const rowElement = $(event.target).closest(
+        'div[data-display="table-row"]',
+      );
       let { top } = rowElement.position();
       top += 23;
       this.setState({ top });
@@ -174,7 +177,6 @@ class TableContainer extends Component {
   handlePopupClose() {
     $('.table-container .details').removeClass('active');
   }
-
 
   handlePropagation(e) {
     e.stopPropagation();
@@ -202,11 +204,16 @@ class TableContainer extends Component {
             <Table
               columns={this.columns}
               data={this.state.bulbs}
+              rowKey="name"
               onRowClick={(row, event) => this.handleRowClick(row, event)}
             />
           </div>
           <div className="col details bg-dark text-light text-center rounded">
-            <button type="button" className="btn close-button bg-dark text-light" onClick={this.handlePopupClose}>
+            <button
+              type="button"
+              className="btn close-button bg-dark text-light"
+              onClick={this.handlePopupClose}
+            >
               <FaClose />
             </button>
             <div className="pointer" style={{ top: this.state.top }} />
@@ -214,13 +221,25 @@ class TableContainer extends Component {
               <div className="my-auto">
                 <div className="py-5">
                   {this.state.selectedRow.name}
-                  <Button plaintext className="text-light ml-2" id="Popover1" onClick={() => { this.toggle(); }}>
+                  <Button
+                    plaintext
+                    className="text-light ml-2"
+                    id="Popover1"
+                    onClick={() => {
+                      this.toggle();
+                    }}
+                  >
                     <FaPencil />
                   </Button>
-                  <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={() => { this.toggle(); }}>
-                    <PopoverHeader>
-                      Change name
-                    </PopoverHeader>
+                  <Popover
+                    placement="bottom"
+                    isOpen={this.state.popoverOpen}
+                    target="Popover1"
+                    toggle={() => {
+                      this.toggle();
+                    }}
+                  >
+                    <PopoverHeader>Change name</PopoverHeader>
                     <PopoverBody>
                       <div className="form-group">
                         <input
@@ -229,7 +248,12 @@ class TableContainer extends Component {
                           value={this.state.bulbName}
                           onChange={event => this.handleNameChange(event)}
                         />
-                        <Button className="mt-3" onClick={() => { this.setNewName(); }}>
+                        <Button
+                          className="mt-3"
+                          onClick={() => {
+                            this.setNewName();
+                          }}
+                        >
                           Change
                         </Button>
                       </div>
