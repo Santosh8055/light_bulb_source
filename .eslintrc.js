@@ -15,6 +15,7 @@ module.exports = {
         "react/destructuring-assignment": 0,
         "jsx-a11y/label-has-for": 0,
         "no-param-reassign": 0,
-        "implicit-arrow-linebreak": 0
+        "implicit-arrow-linebreak": 0,
+        "jsx-a11y/label-has-associated-control":0
     }
 };

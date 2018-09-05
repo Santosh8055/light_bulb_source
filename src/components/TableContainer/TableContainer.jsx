@@ -17,12 +17,12 @@ class TableContainer extends Component {
       {
         field: 'name',
         label: 'Name',
-        // sortable: true,
+        sortable: true,
       },
       {
         field: 'active',
         label: 'State',
-        // sortable: true,
+        sortable: true,
         render: (value, row) => (
           <label className="switch" onClick={this.handlePropagation}>
             <input
@@ -39,7 +39,7 @@ class TableContainer extends Component {
       {
         field: 'brightness',
         label: 'Brightness',
-        // sortable: true,
+        sortable: true,
       },
     ];
     this.state = {
